@@ -1,0 +1,26 @@
+# Maintainer: David Roheim <david dot roheim at gmail dot com>
+pkgname=zendframework2-min
+pkgver=2.2.5
+pkgrel=1
+pkgdesc="An object-oriented framework for PHP - Minimal version"
+arch=('any')
+url="http://framework.zend.com/"
+license=('BSD')
+options=(!strip)
+depends=('php>=5.3.3')
+optdepends=()
+conflicts=('zendframework2')
+source=("http://packages.zendframework.com/releases/ZendFramework-$pkgver/ZendFramework-minimal-$pkgver.tgz")
+sha256sums=('d90a996ba58c70f82322c0b356c458044ffaa2cebcd79502467cb0a5bba9b57c')
+
+build() {
+    true
+}
+
+package() {
+    cd "$srcdir/ZendFramework-minimal-$pkgver"
+    install -Dm644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+    cp -R . "$pkgdir/usr/share/$pkgname"
+    install -d "$pkgdir/usr/bin"
+    ln -s "/usr/share/$pkgname/bin/zf.sh" "$pkgdir/usr/bin/zf2"
+}
